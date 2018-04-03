@@ -7,12 +7,24 @@
 //
 
 import UIKit
+import AVFoundation
 
 class ViewController: UIViewController {
+	
+var voiceRecording: AVAudioPlayer!
+var recordingSession: AVAudioSession!
+var micRecorder: AVAudioRecorder!
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        title = "Record your message."
+	recordingSession = AVAudioSession.sharedInstance()
+
+	do {
+		try recordingSession.setCategory(AVAudioSessionCategoryPlayAndRecord)
+		try recordingSession.setActive(true)
+	}
     }
 
     override func didReceiveMemoryWarning() {
@@ -22,4 +34,5 @@ class ViewController: UIViewController {
 
 
 }
+
 
