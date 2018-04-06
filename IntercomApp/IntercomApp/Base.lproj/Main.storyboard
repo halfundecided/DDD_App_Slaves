@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -18,14 +19,39 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="power-button" translatesAutoresizingMaskIntoConstraints="NO" id="sfg-CC-e2s">
-                                <rect key="frame" x="77" y="179" width="220" height="220"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MZn-V4-Il6">
+                                <rect key="frame" x="16" y="461" width="343" height="66"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="66" id="EXM-2I-gFF"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="45"/>
+                                <state key="normal" title="Record">
+                                    <color key="titleColor" red="0.079696639819742843" green="1" blue="0.0017117565483995012" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="recordTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="GO6-fH-FiD"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="power-button" translatesAutoresizingMaskIntoConstraints="NO" id="sfg-CC-e2s">
+                                <rect key="frame" x="77" y="154" width="220" height="220"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="sfg-CC-e2s" firstAttribute="centerX" secondItem="MZn-V4-Il6" secondAttribute="centerX" id="2IB-7y-PSf"/>
+                            <constraint firstItem="sfg-CC-e2s" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="134" id="3AP-bZ-NPo"/>
+                            <constraint firstItem="MZn-V4-Il6" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="74L-1H-10B"/>
+                            <constraint firstItem="sfg-CC-e2s" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="77" id="8YA-tD-rlI"/>
+                            <constraint firstItem="MZn-V4-Il6" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="M1S-fs-8JN"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="MZn-V4-Il6" secondAttribute="bottom" constant="140" id="Tqx-eu-mGC"/>
+                            <constraint firstItem="MZn-V4-Il6" firstAttribute="top" secondItem="sfg-CC-e2s" secondAttribute="bottom" constant="87" id="jOZ-8r-njP"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="recordButton" destination="MZn-V4-Il6" id="sCe-kF-wfV"/>
+                        <outlet property="recordImage" destination="sfg-CC-e2s" id="8U4-Wq-Tz4"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
