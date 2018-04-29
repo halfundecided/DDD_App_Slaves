@@ -26,7 +26,7 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="45"/>
                                 <state key="normal" title="Record">
-                                    <color key="titleColor" red="0.079696639819742843" green="1" blue="0.0017117565483995012" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleColor" red="1" green="0.49327188729999999" blue="0.47399842739999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="recordTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="GO6-fH-FiD"/>
