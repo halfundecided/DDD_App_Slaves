@@ -154,11 +154,16 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, CBCentralManage
         }
     }
     
+    @IBAction func connectBT(_ sender: Any) {
+        
+        manager = CBCentralManager(delegate: self, queue: nil)
+    }
+    
+    
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        
-        manager = CBCentralManager(delegate: self, queue: nil)
         
         recordingSession = AVAudioSession.sharedInstance()
 

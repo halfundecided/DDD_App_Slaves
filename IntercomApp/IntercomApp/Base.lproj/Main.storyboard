@@ -35,6 +35,16 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="power-button" translatesAutoresizingMaskIntoConstraints="NO" id="sfg-CC-e2s">
                                 <rect key="frame" x="77" y="154" width="220" height="220"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="52b-xE-1Yi">
+                                <rect key="frame" x="129" y="576" width="116" height="44"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <state key="normal" title="Connect">
+                                    <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="connectBT:" destination="BYZ-38-t0r" eventType="touchUpInside" id="WO5-gc-9Xh"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -42,9 +52,13 @@
                             <constraint firstItem="sfg-CC-e2s" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="134" id="3AP-bZ-NPo"/>
                             <constraint firstItem="MZn-V4-Il6" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="74L-1H-10B"/>
                             <constraint firstItem="sfg-CC-e2s" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="77" id="8YA-tD-rlI"/>
+                            <constraint firstItem="52b-xE-1Yi" firstAttribute="centerX" secondItem="MZn-V4-Il6" secondAttribute="centerX" id="LJS-SK-62N"/>
                             <constraint firstItem="MZn-V4-Il6" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="M1S-fs-8JN"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="MZn-V4-Il6" secondAttribute="bottom" constant="140" id="Tqx-eu-mGC"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="52b-xE-1Yi" secondAttribute="bottom" constant="47" id="cTw-96-xGR"/>
+                            <constraint firstItem="52b-xE-1Yi" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="129" id="dhk-I2-ztj"/>
                             <constraint firstItem="MZn-V4-Il6" firstAttribute="top" secondItem="sfg-CC-e2s" secondAttribute="bottom" constant="87" id="jOZ-8r-njP"/>
+                            <constraint firstItem="52b-xE-1Yi" firstAttribute="top" secondItem="MZn-V4-Il6" secondAttribute="bottom" constant="49" id="kcN-pS-CTf"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
