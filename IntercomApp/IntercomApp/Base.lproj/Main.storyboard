@@ -38,11 +38,11 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="52b-xE-1Yi">
                                 <rect key="frame" x="129" y="576" width="116" height="44"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                <state key="normal" title="Connect">
+                                <state key="normal" title="Play">
                                     <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="connectBT:" destination="BYZ-38-t0r" eventType="touchUpInside" id="WO5-gc-9Xh"/>
+                                    <action selector="PlaySound:" destination="BYZ-38-t0r" eventType="touchUpInside" id="nBA-qB-ol6"/>
                                 </connections>
                             </button>
                         </subviews>

@@ -9,87 +9,103 @@
 import UIKit
 import AVFoundation
 import CoreBluetooth
+import MediaPlayer
 
-class ViewController: UIViewController, AVAudioRecorderDelegate, CBCentralManagerDelegate, CBPeripheralDelegate {
+class ViewController: UIViewController, AVAudioRecorderDelegate/*, CBCentralManagerDelegate, CBPeripheralDelegate*/ {
     
     var voiceRecording: AVAudioPlayer!
     var recordingSession: AVAudioSession!
     var micRecorder: AVAudioRecorder!
-    var manager: CBCentralManager!
-    var peripheral: CBPeripheral!
+//    var manager: CBCentralManager!
+//    var peripheral: CBPeripheral!
+//    var currentRoute: AVAudioSessionRouteDescription { get{} }
+//    var outputDataSources: [AVAudioSessionDataSourceDescription]?
+    
+    var audioPlayer = AVAudioPlayer()
     
     
     //Add CBUUID's
-    let NAME = "Onyx"
-    let SCRATCH_UUID =
-        CBUUID(string: "a495ff21-c5b1-4b44-b512-1370f02d74de")
-    let SERVICE_UUID =
-        CBUUID(string: "a495ff20-c5b1-4b44-b512-1370f02d74de")
+//    let NAME = "Onyx"
+//    let SCRATCH_UUID =
+//        CBUUID(string: "a495ff21-c5b1-4b44-b512-1370f02d74de")
+//    let SERVICE_UUID =
+//        CBUUID(string: "a495ff20-c5b1-4b44-b512-1370f02d74de")
     
     @IBOutlet weak var recordImage: UIImageView!
     
-    func centralManagerDidUpdateState(_ central: CBCentralManager) {
-        if central.state == CBManagerState.poweredOn {
-            central.scanForPeripherals(withServices: nil, options: nil)
-        } else {
-            print("Bluetooth is not available")
-        }
+    
+    @IBAction func PlaySound(_ sender: Any) {
+        audioPlayer.play()
+        let wrapperView = UIView(frame: CGRect(x: 30, y: 200, width: 260, height: 20))
+        self.view.backgroundColor = UIColor.clear
+        self.view.addSubview(wrapperView)
+        let volumeView = MPVolumeView(frame: wrapperView.bounds)
+        wrapperView.addSubview(volumeView)
     }
     
-    private func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral, advertisementData: [String: AnyObject], RSSI: NSNumber) {
-        let device = (advertisementData as NSDictionary)
-            .object(forKey: CBAdvertisementDataLocalNameKey) as? NSString
-        
-        if device?.contains(NAME) == true {
-            self.manager.stopScan()
-            
-            self.peripheral = peripheral
-            self.peripheral.delegate = self
-            
-            manager.connect(peripheral, options: nil)
-        }
-    }
     
-    func centralManager(
-        central: CBCentralManager,
-        didConnectPeripheral peripheral: CBPeripheral) {
-        peripheral.discoverServices(nil)
-    }
-    
-    private func peripheral(
-        peripheral: CBPeripheral,
-        didDiscoverServices error: NSError?) {
-        for service in peripheral.services! {
-            let thisService = service as CBService
-            
-            if service.uuid == SERVICE_UUID {
-                peripheral.discoverCharacteristics(nil, for: thisService)
-            }
-        }
-    }
-    
-    private func peripheral(
-        peripheral: CBPeripheral,
-        didDiscoverCharacteristicsForService service: CBService,
-        error: NSError?) {
-        for characteristic in service.characteristics! {
-            let thisCharacteristic = characteristic as CBCharacteristic
-            
-            if thisCharacteristic.uuid == SCRATCH_UUID {
-                self.peripheral.setNotifyValue(
-                    true,
-                    for: thisCharacteristic
-                )
-            }
-        }
-    }
-    
-    private func centralManager(
-        central: CBCentralManager,
-        didDisconnectPeripheral peripheral: CBPeripheral,
-        error: NSError?) {
-        central.scanForPeripherals(withServices: nil, options: nil)
-    }
+//    func centralManagerDidUpdateState(_ central: CBCentralManager) {
+//        if central.state == CBManagerState.poweredOn {
+//            central.scanForPeripherals(withServices: nil, options: nil)
+//        } else {
+//            print("Bluetooth is not available")
+//        }
+//    }
+//
+//    private func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral, advertisementData: [String: AnyObject], RSSI: NSNumber) {
+//        let device = (advertisementData as NSDictionary)
+//            .object(forKey: CBAdvertisementDataLocalNameKey) as? NSString
+//
+//        if device?.contains(NAME) == true {
+//            self.manager.stopScan()
+//
+//            self.peripheral = peripheral
+//            self.peripheral.delegate = self
+//
+//            manager.connect(peripheral, options: nil)
+//        }
+//    }
+//
+//    func centralManager(
+//        central: CBCentralManager,
+//        didConnectPeripheral peripheral: CBPeripheral) {
+//        peripheral.discoverServices(nil)
+//    }
+//
+//    private func peripheral(
+//        peripheral: CBPeripheral,
+//        didDiscoverServices error: NSError?) {
+//        for service in peripheral.services! {
+//            let thisService = service as CBService
+//
+//            if service.uuid == SERVICE_UUID {
+//                peripheral.discoverCharacteristics(nil, for: thisService)
+//            }
+//        }
+//    }
+//
+//    private func peripheral(
+//        peripheral: CBPeripheral,
+//        didDiscoverCharacteristicsForService service: CBService,
+//        error: NSError?) {
+//        for characteristic in service.characteristics! {
+//            let thisCharacteristic = characteristic as CBCharacteristic
+//
+//            if thisCharacteristic.uuid == SCRATCH_UUID {
+//                self.peripheral.setNotifyValue(
+//                    true,
+//                    for: thisCharacteristic
+//                )
+//            }
+//        }
+//    }
+//
+//    private func centralManager(
+//        central: CBCentralManager,
+//        didDisconnectPeripheral peripheral: CBPeripheral,
+//        error: NSError?) {
+//        central.scanForPeripherals(withServices: nil, options: nil)
+//    }
     
     
     func getDocumentsDirectory() -> URL {
@@ -154,10 +170,10 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, CBCentralManage
         }
     }
     
-    @IBAction func connectBT(_ sender: Any) {
-        
-        manager = CBCentralManager(delegate: self, queue: nil)
-    }
+//    @IBAction func connectBT(_ sender: Any) {
+//
+//        manager = CBCentralManager(delegate: self, queue: nil)
+//    }
     
     
     
@@ -188,6 +204,23 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, CBCentralManage
         {
             
         }
+        
+        let path = Bundle.main.path(forResource: "Amorphis - My Enemy", ofType: "mp3")
+        let music = NSURL(fileURLWithPath: path!)
+        
+        do {
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+            try AVAudioSession.sharedInstance().setActive(true)
+        } catch {
+            print("error in shared instance")
+        }
+        
+        do {
+            try audioPlayer = AVAudioPlayer(contentsOf: music as URL)
+        } catch {
+            
+        }
+        audioPlayer.prepareToPlay()
         
     }
 
