@@ -8,7 +8,6 @@
 
 import UIKit
 import AVFoundation
-import CoreBluetooth
 import MediaPlayer
 
 class ViewController: UIViewController, AVAudioRecorderDelegate/*, CBCentralManagerDelegate, CBPeripheralDelegate*/ {
@@ -16,106 +15,43 @@ class ViewController: UIViewController, AVAudioRecorderDelegate/*, CBCentralMana
     var voiceRecording: AVAudioPlayer!
     var recordingSession: AVAudioSession!
     var micRecorder: AVAudioRecorder!
-//    var manager: CBCentralManager!
-//    var peripheral: CBPeripheral!
-//    var currentRoute: AVAudioSessionRouteDescription { get{} }
-//    var outputDataSources: [AVAudioSessionDataSourceDescription]?
     
     var audioPlayer = AVAudioPlayer()
     
-    
-    //Add CBUUID's
-//    let NAME = "Onyx"
-//    let SCRATCH_UUID =
-//        CBUUID(string: "a495ff21-c5b1-4b44-b512-1370f02d74de")
-//    let SERVICE_UUID =
-//        CBUUID(string: "a495ff20-c5b1-4b44-b512-1370f02d74de")
-    
     @IBOutlet weak var recordImage: UIImageView!
+ 
     
-    
-    @IBAction func PlaySound(_ sender: Any) {
-        audioPlayer.play()
-        let wrapperView = UIView(frame: CGRect(x: 30, y: 200, width: 260, height: 20))
-        self.view.backgroundColor = UIColor.clear
-        self.view.addSubview(wrapperView)
-        let volumeView = MPVolumeView(frame: wrapperView.bounds)
-        wrapperView.addSubview(volumeView)
+    @IBAction func connect(_ sender: Any) {
+        let alertController = UIAlertController (title: "Connect to Bluetooth", message: "Go to Settings?", preferredStyle: .alert)
+        
+        let settingsAction = UIAlertAction(title: "Settings", style: .default) { (_) -> Void in
+            guard let settingsUrl = URL(string: "App-Prefs:root=General") else {
+                return
+            }
+            
+            if UIApplication.shared.canOpenURL(settingsUrl) {
+                UIApplication.shared.open(settingsUrl, completionHandler: { (success) in
+                    print("Settings opened: \(success)") // Prints true
+                })
+            }
+        }
+        alertController.addAction(settingsAction)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
+        alertController.addAction(cancelAction)
+        
+        present(alertController, animated: true, completion: nil)
     }
-    
-    
-//    func centralManagerDidUpdateState(_ central: CBCentralManager) {
-//        if central.state == CBManagerState.poweredOn {
-//            central.scanForPeripherals(withServices: nil, options: nil)
-//        } else {
-//            print("Bluetooth is not available")
-//        }
-//    }
-//
-//    private func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral, advertisementData: [String: AnyObject], RSSI: NSNumber) {
-//        let device = (advertisementData as NSDictionary)
-//            .object(forKey: CBAdvertisementDataLocalNameKey) as? NSString
-//
-//        if device?.contains(NAME) == true {
-//            self.manager.stopScan()
-//
-//            self.peripheral = peripheral
-//            self.peripheral.delegate = self
-//
-//            manager.connect(peripheral, options: nil)
-//        }
-//    }
-//
-//    func centralManager(
-//        central: CBCentralManager,
-//        didConnectPeripheral peripheral: CBPeripheral) {
-//        peripheral.discoverServices(nil)
-//    }
-//
-//    private func peripheral(
-//        peripheral: CBPeripheral,
-//        didDiscoverServices error: NSError?) {
-//        for service in peripheral.services! {
-//            let thisService = service as CBService
-//
-//            if service.uuid == SERVICE_UUID {
-//                peripheral.discoverCharacteristics(nil, for: thisService)
-//            }
-//        }
-//    }
-//
-//    private func peripheral(
-//        peripheral: CBPeripheral,
-//        didDiscoverCharacteristicsForService service: CBService,
-//        error: NSError?) {
-//        for characteristic in service.characteristics! {
-//            let thisCharacteristic = characteristic as CBCharacteristic
-//
-//            if thisCharacteristic.uuid == SCRATCH_UUID {
-//                self.peripheral.setNotifyValue(
-//                    true,
-//                    for: thisCharacteristic
-//                )
-//            }
-//        }
-//    }
-//
-//    private func centralManager(
-//        central: CBCentralManager,
-//        didDisconnectPeripheral peripheral: CBPeripheral,
-//        error: NSError?) {
-//        central.scanForPeripherals(withServices: nil, options: nil)
-//    }
-    
     
     func getDocumentsDirectory() -> URL {
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+
         print(paths[0])
         return paths[0]
     }
     
     func startRecording()
     {
+        audioPlayer.stop()
         let audioFilename = getDocumentsDirectory().appendingPathComponent("recording.m4a")
         
         let settings = [
@@ -142,6 +78,12 @@ class ViewController: UIViewController, AVAudioRecorderDelegate/*, CBCentralMana
         micRecorder = nil
         
         if success {
+            audioPlayer.play()
+            let wrapperView = UIView(frame: CGRect(x: 60, y: 540, width: 260, height: 20))
+            self.view.backgroundColor = UIColor.clear
+            self.view.addSubview(wrapperView)
+            let volumeView = MPVolumeView(frame: wrapperView.bounds)
+            wrapperView.addSubview(volumeView)
             recordButton.setTitle("Tap to Re-record", for: .normal)
         } else {
             recordButton.setTitle("Tap to Record", for: .normal)
@@ -169,13 +111,6 @@ class ViewController: UIViewController, AVAudioRecorderDelegate/*, CBCentralMana
             stopRecording(success: false)
         }
     }
-    
-//    @IBAction func connectBT(_ sender: Any) {
-//
-//        manager = CBCentralManager(delegate: self, queue: nil)
-//    }
-    
-    
     
     override func viewDidLoad()
     {
@@ -205,7 +140,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate/*, CBCentralMana
             
         }
         
-        let path = Bundle.main.path(forResource: "Amorphis - My Enemy", ofType: "mp3")
+        let path = Bundle.main.path(forResource: "01. Have It All", ofType: "mp3")
         let music = NSURL(fileURLWithPath: path!)
         
         do {

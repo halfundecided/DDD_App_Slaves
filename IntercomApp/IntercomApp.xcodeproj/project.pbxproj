@@ -12,6 +12,7 @@
 		504CEA3F2072EE3600D925BE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 504CEA3D2072EE3600D925BE /* Main.storyboard */; };
 		504CEA412072EE3700D925BE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 504CEA402072EE3700D925BE /* Assets.xcassets */; };
 		504CEA442072EE3700D925BE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 504CEA422072EE3700D925BE /* LaunchScreen.storyboard */; };
+		5094272C2097C4E500B11E4F /* 01. Have It All.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5094272B2097C4E500B11E4F /* 01. Have It All.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		504CEA402072EE3700D925BE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		504CEA432072EE3700D925BE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		504CEA452072EE3700D925BE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5094272B2097C4E500B11E4F /* 01. Have It All.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "01. Have It All.mp3"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +56,7 @@
 		504CEA382072EE3600D925BE /* IntercomApp */ = {
 			isa = PBXGroup;
 			children = (
+				5094272B2097C4E500B11E4F /* 01. Have It All.mp3 */,
 				504CEA392072EE3600D925BE /* AppDelegate.swift */,
 				504CEA3B2072EE3600D925BE /* ViewController.swift */,
 				504CEA3D2072EE3600D925BE /* Main.storyboard */,
@@ -124,6 +127,7 @@
 			files = (
 				504CEA442072EE3700D925BE /* LaunchScreen.storyboard in Resources */,
 				504CEA412072EE3700D925BE /* Assets.xcassets in Resources */,
+				5094272C2097C4E500B11E4F /* 01. Have It All.mp3 in Resources */,
 				504CEA3F2072EE3600D925BE /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -281,7 +285,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 985WCWGJY4;
+				DEVELOPMENT_TEAM = G9TJZWX6R7;
 				INFOPLIST_FILE = IntercomApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -299,7 +303,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 985WCWGJY4;
+				DEVELOPMENT_TEAM = G9TJZWX6R7;
 				INFOPLIST_FILE = IntercomApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
