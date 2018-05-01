@@ -18,6 +18,8 @@ class ViewController: UIViewController, AVAudioRecorderDelegate/*, CBCentralMana
     
     var audioPlayer = AVAudioPlayer()
     
+    var prepped: Bool = false
+    
     @IBOutlet weak var recordImage: UIImageView!
  
     
@@ -51,7 +53,10 @@ class ViewController: UIViewController, AVAudioRecorderDelegate/*, CBCentralMana
     
     func startRecording()
     {
-        audioPlayer.stop()
+        if prepped
+        {
+            audioPlayer.stop()
+        }
         let audioFilename = getDocumentsDirectory().appendingPathComponent("recording.m4a")
         
         let settings = [
@@ -72,12 +77,38 @@ class ViewController: UIViewController, AVAudioRecorderDelegate/*, CBCentralMana
         }
     }
     
+    func prepAudio()
+    {
+        prepped = true
+        
+        let audioFilename = getDocumentsDirectory().appendingPathComponent("recording.m4a")
+        //let path = Bundle.main.path(forResource: "recording", ofType: "m4a")
+       // let music = NSURL(fileURLWithPath: path!)
+        
+        do {
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+            try AVAudioSession.sharedInstance().setActive(true)
+        } catch {
+            print("error in shared instance")
+        }
+        
+        do {
+            try audioPlayer = AVAudioPlayer(contentsOf: audioFilename as URL)
+        } catch {
+            
+        }
+        audioPlayer.prepareToPlay()
+    }
+    
     func stopRecording(success: Bool)
     {
         micRecorder.stop()
         micRecorder = nil
         
         if success {
+            
+            prepAudio()
+            
             audioPlayer.play()
             let wrapperView = UIView(frame: CGRect(x: 60, y: 540, width: 260, height: 20))
             self.view.backgroundColor = UIColor.clear
@@ -139,24 +170,6 @@ class ViewController: UIViewController, AVAudioRecorderDelegate/*, CBCentralMana
         {
             
         }
-        
-        let path = Bundle.main.path(forResource: "01. Have It All", ofType: "mp3")
-        let music = NSURL(fileURLWithPath: path!)
-        
-        do {
-            try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
-            try AVAudioSession.sharedInstance().setActive(true)
-        } catch {
-            print("error in shared instance")
-        }
-        
-        do {
-            try audioPlayer = AVAudioPlayer(contentsOf: music as URL)
-        } catch {
-            
-        }
-        audioPlayer.prepareToPlay()
-        
     }
 
     override func didReceiveMemoryWarning() {
